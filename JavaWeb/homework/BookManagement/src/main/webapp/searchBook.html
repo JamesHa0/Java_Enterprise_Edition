@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>searchBook</title>
+</head>
+<body>
+    <h2>查询图书</h2>
+    <form>
+        <label>
+            请输入要查询的图书ISBN码:
+            <input type="text" name="isbn"/><br>
+            或书名：
+            <input type="text" name="bookName"/><br>
+        </label>
+        <button onclick="search()"></button>
+    </form>
+    <script>
+        function search() {
+            var isbn = document.getElementById("isbn").value;
+            var bookName = document.getElementById("bookName").value;
+            let xhr = new XMLHttpRequest();
+            xhr.open("get","https://localhost:8080/bookManagement?isbn="+isbn+"&bookName="+bookName);
+            xhr.onreadystatechange = function (){
+                if(xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300){
+                    //服务器端已经返回数据了
+                    console.log(xhr.responseText);
+                } else{
+                    console.log(xhr.status);
+                }
+            }
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

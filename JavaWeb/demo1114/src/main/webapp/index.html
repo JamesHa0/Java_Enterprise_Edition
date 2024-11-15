@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="btn" type="button" value="发送Ajax请求" onclick="test()" />
+<script>
+    function test(){
+        //创建对象
+        let xhr = new XMLHttpRequest();
+        //初始化
+        xhr.open("get","http://localhost:8080/demo1114/hello");
+        //设置状态监听
+        xhr.onreadystatechange = function (){
+            if(xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300){
+                //服务器端已经返回数据了
+                console.log(xhr.responseText);
+            } else{
+                console.log(xhr.status);
+            }
+        }
+        //发送Ajax
+        xhr.send();
+    }
+</script>
+</body>
+</html>
