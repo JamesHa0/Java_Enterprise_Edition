@@ -5,6 +5,35 @@
     <title>addBook</title>
 </head>
 <body>
-
+<h2>添加图书</h2>
+<form>
+    <label>
+        请输入要添加的图书ISBN码:
+        <input type="text" id="isbn"/><br>
+        书名：
+        <input type="text" id="title"/><br>
+        作者：
+        <input type="text" id="author"/><br>
+    </label>
+    <button onclick="add()">添加</button>
+</form>
+<script>
+    function add() {
+        var isbn = document.getElementById("isbn").value;
+        var bookName = document.getElementById("title").value;
+        var author = document.getElementById("author").value;
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","https://localhost:8080/BookManagement/addBook?title="+bookName+"&author="+author+"&isbn="+isbn);
+        xhr.onreadystatechange = function (){
+            if(xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300){
+                //服务器端已经返回数据了
+                console.log(xhr.responseText);
+            } else{
+                console.log(xhr.status);
+            }
+        }
+        xhr.send();
+    }
+</script>
 </body>
 </html>

@@ -9,18 +9,18 @@
     <form>
         <label>
             请输入要查询的图书ISBN码:
-            <input type="text" name="isbn"/><br>
+            <input type="text" id="isbn"/><br>
             或书名：
-            <input type="text" name="bookName"/><br>
+            <input type="text" id="title"/><br>
         </label>
-        <button onclick="search()"></button>
+        <button onclick="search()">查询</button>
     </form>
     <script>
         function search() {
             var isbn = document.getElementById("isbn").value;
-            var bookName = document.getElementById("bookName").value;
+            var bookName = document.getElementById("title").value;
             let xhr = new XMLHttpRequest();
-            xhr.open("get","https://localhost:8080/bookManagement?isbn="+isbn+"&bookName="+bookName);
+            xhr.open("get","https://localhost:8080/BookManagement/searchBook?title="+bookName+"&query="+isbn);
             xhr.onreadystatechange = function (){
                 if(xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300){
                     //服务器端已经返回数据了

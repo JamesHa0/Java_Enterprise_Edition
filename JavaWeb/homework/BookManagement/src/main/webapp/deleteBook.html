@@ -5,6 +5,29 @@
     <title>deleteBook</title>
 </head>
 <body>
-
+<h2>删除图书</h2>
+<form>
+    <label>
+        请输入要删除的图书ISBN码:
+        <input type="text" id="isbn"/><br>
+    </label>
+    <button onclick="del()">添加</button>
+</form>
+<script>
+    function del() {
+        var isbn = document.getElementById("isbn").value;
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","https://localhost:8080/BookManagement/deleteBook?isbn="+isbn);
+        xhr.onreadystatechange = function (){
+            if(xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300){
+                //服务器端已经返回数据了
+                console.log(xhr.responseText);
+            } else{
+                console.log(xhr.status);
+            }
+        }
+        xhr.send();
+    }
+</script>
 </body>
 </html>
